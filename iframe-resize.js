@@ -49,7 +49,6 @@
                     var frame = $(this);
                     var height = $(this.contentWindow.document).height();
                     frame.height(height);
-                    alert(height);
                });
            });
         },
