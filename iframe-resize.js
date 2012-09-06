@@ -53,7 +53,7 @@
            });
         },
 
-        destory: function() {
+        destroy: function() {
            return this.each(function(index, frame) {
                frame = $(frame);
  
