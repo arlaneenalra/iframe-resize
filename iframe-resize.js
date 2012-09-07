@@ -55,7 +55,7 @@
         },
 
         // Resize a iframe to it's content
-        sizeToContent: function auto_size() {
+        sizeToContent: function sizeToContent() {
             return this.each(function sizeCallback(index, frame) {
                 var height = $(frame.contentWindow.document).height();
                 $(frame).height(height);
