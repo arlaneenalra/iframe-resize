@@ -35,7 +35,7 @@
 (function( $ ) {
     
     var methods = {
-        init: function() {
+        init: function init() {
             // Return this for chaining
             return this.each(function(index, frame) {
 
@@ -43,17 +43,26 @@
                // Remove the default min-height class if we need to
                frame.removeClass("iframeResize-min-height");
 
+               var sizeEventHandler = function sizeEventHander() {
+                    $(this).iframeResize('sizeToContent');
+               };
+
                // Bind a load event to resize the iframe to 
                // its content
-               frame.bind("load.iframeResize", function () {
-                    var frame = $(this);
-                    var height = $(this.contentWindow.document).height();
-                    frame.height(height);
-               });
-           });
+               frame.bind("load.iframeResize", sizeEventHandler);
+           
+            });
         },
 
-        destroy: function() {
+        // Resize a iframe to it's content
+        sizeToContent: function auto_size() {
+            return this.each(function sizeCallback(index, frame) {
+                var height = $(frame.contentWindow.document).height();
+                $(frame).height(height);
+            });
+        },
+
+        destroy: function destroy() {
            return this.each(function(index, frame) {
                frame = $(frame);
  
