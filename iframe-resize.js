@@ -50,15 +50,20 @@
                // Bind a load event to resize the iframe to 
                // its content
                frame.bind("load.iframeResize", sizeEventHandler);
-           
             });
         },
 
         // Resize a iframe to it's content
         sizeToContent: function sizeToContent() {
             return this.each(function sizeCallback(index, frame) {
+                var wrapped_frame = $(frame);
+                
+                wrapped_frame.height(0); // reset sizing
                 var height = $(frame.contentWindow.document).height();
-                $(frame).height(height);
+
+                // we add one to avoid scrollbars being added 
+                // due to decimals in calculated height.
+                wrapped_frame.height(height+1); 
             });
         },
 
@@ -77,7 +82,8 @@
 
         if( methods[ method ] ) {
             // call an explicitly named method with the arguments after the method
-            return methods[ method ].apply( this, Array.prototype.slice.call( arguments, 1));
+            return methods[ method ].apply(
+                this, Array.prototype.slice.call( arguments, 1));
 
         } else if ( typeof method === 'object' || ! method ) {
             // Just run the init method 
@@ -85,7 +91,8 @@
 
         } else {
             // Heh! That's an undefined method!
-            $.error( 'Attept to call undefined method "' + method + '" on jQuery.iframeResize');
+            $.error( 'Attept to call undefined method "'
+                + method + '" on jQuery.iframeResize');
         }
     };
 
