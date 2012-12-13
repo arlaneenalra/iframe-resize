@@ -28,8 +28,16 @@
  *  
  *  $('iframe').iframeResize();
  *
- *  The class iframeResize-min-height can be used to set a default height to the iframe 
- *  and will be removed automatically when the content loads.
+ *  This will bind an iframe a load event handler to each iframe and resize
+ *  them to the current size of their content.  It also registers a
+ *  handler for the custom 'sizeToContent' event that can be triggered
+ *  from within the iframe using:
+ *
+ *  window.parent.$(window.frameElement).trigger("sizeToContent");
+ *
+ *  The class iframeResize-min-height can be used to set a default height to
+ *  the iframe and will be removed automatically when the content loads.
+ *
  */
 
 (function( $ ) {
@@ -39,17 +47,21 @@
             // Return this for chaining
             return this.each(function(index, frame) {
 
-               frame = $(frame);
-               // Remove the default min-height class if we need to
-               frame.removeClass("iframeResize-min-height");
+                frame = $(frame);
+                // Remove the default min-height class if we need to
+                frame.removeClass("iframeResize-min-height");
 
-               var sizeEventHandler = function sizeEventHander() {
-                    $(this).iframeResize('sizeToContent');
-               };
+                var sizeEventHandler = function sizeEventHander() {
+                    frame.iframeResize('sizeToContent');
+                };
 
-               // Bind a load event to resize the iframe to 
-               // its content
-               frame.bind("load.iframeResize", sizeEventHandler);
+                // Bind a load event to resize the iframe to 
+                // its content
+                frame.bind("load.iframeResize", sizeEventHandler);
+
+                // Bind a custom event to allow iframe to signal
+                // a resize
+                frame.bind("sizeToContent.iframeResize", sizeEventHandler);
             });
         },
 
