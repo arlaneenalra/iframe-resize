@@ -1,0 +1,27 @@
+{
+  "name": "iframe-resize",
+  "main": "iframe-resize.js",
+  "version": "1.0.0",
+  "homepage": "https://github.com/arlaneenalra/iframe-resize",
+  "authors": [
+    "Chris Salch <emeraldd.chris@gmail.com>"
+  ],
+  "description": "A jQuery plugin that automatically resizes iframes to their content.",
+  "keywords": [
+    "iframe",
+    "resize",
+    "jquery",
+    "plugin"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": ">=1.8"
+  }
+}
