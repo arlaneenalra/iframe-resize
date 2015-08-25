@@ -1,7 +1,8 @@
-/*
- * Copyright (c) 2015 Chris Salch, 
+/* @license
+ *
+ * Copyright (c) 2015 Chris Salch,
  * http://chrissalch.com/, https://github.com/arlaneenalra/iframe-resize
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -9,10 +10,10 @@
  * distribute, sublicense, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be
  * included in all copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -21,27 +22,9 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
- * ----
- * A simple utility to resize iframes to their content.
- *
- * USAGE:
- *  
- *  $('iframe').iframeResize();
- *
- *  This will bind an iframe a load event handler to each iframe and resize
- *  them to the current size of their content.  It also registers a
- *  handler for the custom 'sizeToContent' event that can be triggered
- *  from within the iframe using:
- *
- *  window.parent.$(window.frameElement).trigger("sizeToContent");
- *
- *  The class iframeResize-min-height can be used to set a default height to
- *  the iframe and will be removed automatically when the content loads.
- *
  */
 
 (function( $ ) {
-    
     var methods = {
         init: function init() {
             // Return this for chaining
@@ -55,7 +38,7 @@
                     frame.iframeResize('sizeToContent');
                 };
 
-                // Bind a load event to resize the iframe to 
+                // Bind a load event to resize the iframe to
                 // its content
                 frame.bind("load.iframeResize", sizeEventHandler);
 
@@ -69,20 +52,20 @@
         sizeToContent: function sizeToContent() {
             return this.each(function sizeCallback(index, frame) {
                 var wrapped_frame = $(frame);
-                
+
                 wrapped_frame.height(0); // reset sizing
                 var height = $(frame.contentWindow.document).height();
 
-                // we add one to avoid scrollbars being added 
+                // we add one to avoid scrollbars being added
                 // due to decimals in calculated height.
-                wrapped_frame.height(height+1); 
+                wrapped_frame.height(height+1);
             });
         },
 
         destroy: function destroy() {
            return this.each(function(index, frame) {
                frame = $(frame);
- 
+
                // unbind the load event
                frame.unbind(".iframeResize");
            });
@@ -98,7 +81,7 @@
                 this, Array.prototype.slice.call( arguments, 1));
 
         } else if ( typeof method === 'object' || ! method ) {
-            // Just run the init method 
+            // Just run the init method
             return methods.init.apply( this, arguments );
 
         } else {
